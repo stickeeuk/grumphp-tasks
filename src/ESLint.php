@@ -2,7 +2,6 @@
 /**
  * @copyright (c) 2006-2017 Stickee Technology Limited
  */
-
 namespace Stickee\GrumPHP;
 
 use GrumPHP\Collection\FilesCollection;
@@ -93,7 +92,7 @@ final class ESLint extends AbstractExternalTask
 
         $arguments = $this->processBuilder->createArgumentsForCommand('eslint');
         $arguments->add('--format=table');
-        $arguments->addOptionalArgument('--config %s', $config['config']);
+        $arguments->addOptionalArgument('--config=%s', $config['config']);
         $arguments->addOptionalArgument('--debug', $config['debug']);
 
         if ($context instanceof RunContext && $config['config'] !== null) {
