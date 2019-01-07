@@ -150,6 +150,8 @@ final class ESLint extends AbstractExternalTask
      */
     private function runOnAllFiles(ContextInterface $context, ProcessArgumentsCollection $arguments)
     {
+        $arguments->add('.');
+
         $process = $this->processBuilder->buildProcess($arguments);
         $process->run();
 
