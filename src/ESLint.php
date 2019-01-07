@@ -55,6 +55,7 @@ final class ESLint extends AbstractExternalTask
             [
                 'config' => null,
                 'debug' => false,
+                'bin' => null,
             ]
         );
 
@@ -90,7 +91,10 @@ final class ESLint extends AbstractExternalTask
 
         $config = $this->getConfiguration();
 
-        $arguments = $this->processBuilder->createArgumentsForCommand('eslint');
+        $arguments = $config['bin'] !== null
+            ? ProcessArgumentsCollection::forExecutable($config['bin'])
+            : $this->processBuilder->createArgumentsForCommand('eslint');
+
         $arguments->add('--format=table');
         $arguments->addOptionalArgument('--config=%s', $config['config']);
         $arguments->addOptionalArgument('--debug', $config['debug']);
