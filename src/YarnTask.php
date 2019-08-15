@@ -17,7 +17,7 @@ class YarnTask extends AbstractExternalTask
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return 'yarn';
     }
@@ -25,7 +25,7 @@ class YarnTask extends AbstractExternalTask
     /**
      * @return OptionsResolver
      */
-    public function getConfigurableOptions()
+    public function getConfigurableOptions(): OptionsResolver
     {
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
@@ -43,7 +43,7 @@ class YarnTask extends AbstractExternalTask
      * @param ContextInterface $context
      * @return bool
      */
-    public function canRunInContext(ContextInterface $context)
+    public function canRunInContext(ContextInterface $context): bool
     {
         return ($context instanceof GitPreCommitContext || $context instanceof RunContext);
     }
@@ -52,7 +52,7 @@ class YarnTask extends AbstractExternalTask
      * @param ContextInterface $context
      * @return \GrumPHP\Runner\TaskResultInterface|TaskResult
      */
-    public function run(ContextInterface $context)
+    public function run(ContextInterface $context): TaskResultInterface
     {
         $config = $this->getConfiguration();
         $arguments = $this->processBuilder->createArgumentsForCommand('yarn');
