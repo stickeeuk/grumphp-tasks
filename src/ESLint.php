@@ -27,7 +27,7 @@ final class ESLint extends AbstractExternalTask
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return 'eslint';
     }
@@ -37,7 +37,7 @@ final class ESLint extends AbstractExternalTask
      *
      * @return array
      */
-    public function getConfiguration()
+    public function getConfiguration(): array
     {
         $configured = $this->grumPHP->getTaskConfiguration($this->getName());
 
@@ -49,7 +49,7 @@ final class ESLint extends AbstractExternalTask
      *
      * @return OptionsResolver
      */
-    public function getConfigurableOptions()
+    public function getConfigurableOptions(): OptionsResolver
     {
         $resolver = new OptionsResolver();
         $resolver->setDefaults(
@@ -72,7 +72,7 @@ final class ESLint extends AbstractExternalTask
      *
      * @return bool
      */
-    public function canRunInContext(ContextInterface $context)
+    public function canRunInContext(ContextInterface $context): bool
     {
         return ($context instanceof GitPreCommitContext || $context instanceof RunContext);
     }
@@ -82,7 +82,7 @@ final class ESLint extends AbstractExternalTask
      *
      * @return TaskResultInterface
      */
-    public function run(ContextInterface $context)
+    public function run(ContextInterface $context): TaskResultInterface
     {
         $files = $context->getFiles()->name('*.js');
         if (0 === count($files)) {
@@ -114,7 +114,7 @@ final class ESLint extends AbstractExternalTask
         ContextInterface $context,
         ProcessArgumentsCollection $arguments,
         FilesCollection $files
-    ) {
+    ): TaskResult {
         $hasErrors = false;
         $messages = [];
 
@@ -145,7 +145,7 @@ final class ESLint extends AbstractExternalTask
      *
      * @return TaskResult
      */
-    private function runOnAllFiles(ContextInterface $context, ProcessArgumentsCollection $arguments)
+    private function runOnAllFiles(ContextInterface $context, ProcessArgumentsCollection $arguments): TaskResult
     {
         $process = $this->processBuilder->buildProcess($arguments);
         $process->run();
